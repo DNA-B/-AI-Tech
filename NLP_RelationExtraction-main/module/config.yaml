@@ -1,0 +1,80 @@
+# PATH
+TRAIN_PATH: "/opt/ml/dataset/train/augment_residence.csv"
+DEV_PATH: "/opt/ml/dataset/train/augment_residence.csv"
+SPLIT_TRAIN_PATH: "/opt/ml/dataset/save_split_dataset/train.csv"
+SPLIT_DEV_PATH: "/opt/ml/dataset/save_split_dataset/dev.csv"
+TEST_PATH: "/opt/ml/dataset/test/test_data.csv"
+FOLD_TRAIN_PATH: "/opt/ml/dataset/fold_dataset/fold_train.csv"
+FOLD_DEV_PATH: "/opt/ml/dataset/fold_dataset/fold_dev.csv"
+OUTPUT_DIR: "./results"
+LOGGING_DIR: "./logs"
+MODEL_SAVE_DIR: "/opt/ml/best_model"
+FOLD_DIR: "/opt/ml/prediction/fold_csv"
+SEED_DIR: "/opt/ml/prediction/seed_csv"
+
+# MODEL (확인 필수)
+MODEL_NAME: "klue/roberta-large"
+MODEL_PATH: "/opt/ml/best_model/pretrain"
+TOTAL_SAVE_MODEL: 5
+
+# LOSS (확인 필수)
+LOSS_FN: 'base' # 'base', 'focal', 'label_smoothing', 'penalty_loss'
+
+# HYPER PARAMETER (확인 필수)
+MAX_EPOCH: 3
+LR: 2.0e-5 # Example Format : 5.0e-5 / 5.e-5 / 5.E-5
+BATCH_SIZE: 32
+WARMUP_STEP: 400
+RATIO: 0.0 # Train Validation Split ratio
+WEIGHT_DECAY: 0.1
+
+# LOG
+SAVING_STEP: 400
+LOGGING_STEP: 400
+EVAL_STEP: 400
+STRATEGY: "steps" ### 추가부분
+
+# WANDB (확인 필수)
+WANDB_PROJECT: "boseong_special"
+WANDB_NAME: "roberta-large_epoch3_batch32_lr=2e-5_warmup=400_entity_punct_discrip_decay=0.1_seed=124(aug)"
+
+# WANDB SWEEP (확인 필수 및 양식 확인(들여쓰기))
+SWEEP_AVAILABLE: 0 # SWEEP을 사용할 것인지 (1 : 사용, 0 : 미사용)
+SWEEP_COUNT: 8 # SWEEP 실행 횟수
+SWEEP_CONFIGURATION: # SWEEP 세부 내용 설정
+  method: 'grid'
+  name: 'epoch and lr tuning'
+  metric:
+    goal: 'maximize'
+    name: 'eval/micro f1 score'
+  parameters:
+    batch_size:
+      values:
+      - 32
+    epochs:
+      values:
+      - 3
+      - 4
+      - 6
+      - 8
+    warmup_steps:
+      values:
+      - 300
+      - 400
+      - 500
+    lr:
+      values:
+      - 5.0e-5
+
+#ENSEMBLE
+FOLD: 0 # [0, 1]
+FOLD_N: 5 #integer : 몇개 폴드할 건지
+SEEDS:
+- 777
+- 77
+
+# Custom Model (확인 필수)
+MODEL_TYPE: 'ko_entity_punct' # 'base', 'entity_special', 'entity_punct', 'ko_entity_special', 'ko_entity_punct', 'cls_entity_special', 'no_cls_entity_special'
+DO_SEQUENTIALBERTMODEL: 0 # SequentialBertModel 사용 여부 (0 : 미사용, 1 : 사용)
+DISCRIP: 1
+PRE_TRAIN: 'None' # None, MLM

@@ -1,0 +1,27 @@
+# PATH
+TRAIN_PATH: '/opt/ml/data/gpt_chat_data/seq2seq_train/gpt_chat_train.csv' # '/opt/ml/data/concat_data/decoder_train/nomulti_concat_train.csv' #'/opt/ml/data/gpt_chat_data/gpt_train_data.csv'
+DEV_PATH: '/opt/ml/data/gpt_chat_data/seq2seq_validation/gpt_chat_valid.csv'
+TEST_PATH: '/opt/ml/data/gpt_chat_data/seq2seq_validation/gpt_chat_valid.csv'
+MODEL_SAVE_DIR: '/opt/ml/KULLM/yeah'
+
+# MODEL (확인 필수)
+MODEL_NAME: 'nlpai-lab/kullm-polyglot-5.8b-v2' # 'paust/pko-t5-large'  # 'byeongal/Ko-DialoGPT' # 'skt/kogpt2-base-v2' # 'gogamza/kobart-base-v2'
+
+# HYPER PARAMETER (확인 필수)
+MAX_EPOCH: 3
+LR: 2.0e-5 # Example Format : 5.0e-5 / 5.e-5 / 5.E-5
+TRAIN_BATCH_SIZE: 16
+EVAL_BATCH_SIZE: 32
+MAX_LENGTH: 256
+WARMUP_STEP: 0.0
+WEIGHT_DECAY: 0.0
+SEED: 14
+
+# LOG
+SAVING_STEP: 300
+LOGGING_STEP: 300
+EVAL_STEP: 300
+
+# WANDB (확인 필수)
+WANDB_PROJECT: 'final project'
+WANDB_NAME: 'gogamza/kobart-base-v2 | gpt chat pre | epoch 2e-5 | batch_size 16 | max length 256'

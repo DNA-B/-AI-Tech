@@ -1,0 +1,6 @@
+# requirements-develop.txt
+django==4.1.10
+djangorestframework==3.14.0
+transformers==4.29.2
+numpy==1.25.0
+pandas==2.0.3
